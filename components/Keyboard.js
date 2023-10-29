@@ -4,10 +4,10 @@ import { Key } from "./Key";
 const rows = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-  ["z", "x", "c", "v", "b", "n", "m"],
+  ["Enter", "z", "x", "c", "v", "b", "n", "m", "Backspace"],
 ];
 
-export const Keyboard = ({ usedWords, guessWord }) => {
+export const Keyboard = ({ usedWords, guessWord, onKeyClick }) => {
   return (
     <div className={`${styles.keyboard}`}>
       {rows.map((row, i) => (
@@ -17,6 +17,7 @@ export const Keyboard = ({ usedWords, guessWord }) => {
               key={key}
               char={key}
               status={getKeyStatus(key, usedWords, guessWord)}
+              onClick={() => onKeyClick(key)}
             />
           ))}
         </div>

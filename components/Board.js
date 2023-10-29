@@ -17,35 +17,40 @@ export const Board = ({}) => {
 
   const restartButtonRef = useRef();
 
+  const processKey = (key) => {
+    if (key === "Enter") {
+      setWords((words) =>
+        words.length < 7 && words[0].length === 5 && isValidWord(words[0])
+          ? ["", ...words]
+          : words
+      );
+    } else if (key === "Backspace") {
+      setWords((words) => {
+        const [currentWord, ...restWords] = words;
+        return [
+          `${currentWord.slice(0, currentWord.length - 1)}`,
+          ...restWords,
+        ];
+      });
+    } else if (key >= "a" && key <= "z") {
+      setWords((words) => {
+        if (words[0].length === 5) return words;
+
+        const [currentWord, ...restWords] = words;
+        return [`${currentWord}${key}`, ...restWords];
+      });
+    }
+  };
+
   useEffect(() => {
     const handleKeydown = (e) => {
       if (e.shiftKey || e.ctrlKey || e.altKey || e.metaKey) return;
+
       // console.log(e);
 
       restartButtonRef.current.blur();
 
-      if (e.code === "Enter") {
-        setWords((words) =>
-          words.length < 7 && words[0].length === 5 && isValidWord(words[0])
-            ? ["", ...words]
-            : words
-        );
-      } else if (e.code === "Backspace") {
-        setWords((words) => {
-          const [currentWord, ...restWords] = words;
-          return [
-            `${currentWord.slice(0, currentWord.length - 1)}`,
-            ...restWords,
-          ];
-        });
-      } else if (e.key >= "a" && e.key <= "z") {
-        setWords((words) => {
-          if (words[0].length === 5) return words;
-
-          const [currentWord, ...restWords] = words;
-          return [`${currentWord}${e.key}`, ...restWords];
-        });
-      }
+      processKey(e.key);
     };
 
     document.addEventListener("keydown", handleKeydown);
@@ -58,6 +63,10 @@ export const Board = ({}) => {
   const handleRestart = () => {
     setWords([""]);
     setGuessWord(selectGuessWord());
+  };
+
+  const handleKeyClick = (key) => {
+    processKey(key);
   };
 
   const wordsReversed = words.slice().reverse();
@@ -84,7 +93,11 @@ export const Board = ({}) => {
           />
         ))}
       </div>
-      <Keyboard usedWords={words.slice(1)} guessWord={guessWord} />
+      <Keyboard
+        usedWords={words.slice(1)}
+        guessWord={guessWord}
+        onKeyClick={handleKeyClick}
+      />
     </>
   );
 };
