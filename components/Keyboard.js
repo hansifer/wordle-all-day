@@ -9,7 +9,7 @@ const rows = [
 
 export const Keyboard = ({ usedWords, guessWord, onKeyClick }) => {
   return (
-    <div className={`${styles.keyboard}`}>
+    <div className={styles.keyboard}>
       {rows.map((row, i) => (
         <div key={i} className={`${styles.keyRow}`}>
           {row.map((key) => (

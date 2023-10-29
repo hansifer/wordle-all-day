@@ -6,6 +6,7 @@ export const Key = ({ status, char, onClick }) => {
     <div
       className={`${styles.key} ${getStatusClass(status)}`}
       onClick={onClick}
+      style={char === "Enter" ? { minWidth: 44, fontSize: 10 } : {}}
     >
       {char === "Backspace" ? (
         <Image src="/delete.svg" height="16" width="16" />
