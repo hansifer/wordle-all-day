@@ -105,7 +105,12 @@ export const Board = ({}) => {
         guessWord={guessWord}
         onKeyClick={handleKeyClick}
       />
-      <Notification visible={words.includes(guessWord) && words[0] === ""} />
+      <Notification
+        visible={
+          (words.includes(guessWord) && words[0] === "") || words.length === 7
+        }
+        guessWord={words.length === 7 ? guessWord : ""}
+      />
     </>
   );
 };

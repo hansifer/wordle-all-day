@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./notification.module.css";
 import { selectVictoryMessage } from "../lib/util";
 
-export const Notification = ({ visible }) => {
+export const Notification = ({ visible, guessWord }) => {
   const [message, setMessage] = useState("");
 
   // set state in useEffect to avoid error "Text content does not match server-rendered HTML"
@@ -12,7 +12,9 @@ export const Notification = ({ visible }) => {
 
   return (
     <div
-      className={styles.notification}
+      className={`${styles.notification} ${
+        guessWord ? styles.notificationFailed : ""
+      }`}
       style={
         visible
           ? {
@@ -25,7 +27,7 @@ export const Notification = ({ visible }) => {
             }
       }
     >
-      {message}
+      {guessWord ? `The word was: "${guessWord}"` : message}
     </div>
   );
 };
