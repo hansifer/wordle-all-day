@@ -8,7 +8,7 @@ export const Notification = ({ visible }) => {
   // set state in useEffect to avoid error "Text content does not match server-rendered HTML"
   useEffect(() => {
     setMessage(selectVictoryMessage());
-  }, []);
+  }, [visible]);
 
   return (
     <div
