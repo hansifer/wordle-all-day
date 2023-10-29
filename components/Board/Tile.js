@@ -1,12 +1,17 @@
+import { classy } from "../../lib/util/css";
+
 import styles from "./tile.module.css";
 
-export const Tile = ({ char, color, active }) => {
+export const Tile = ({ char, color }) => {
+  const className = classy({
+    [styles.tile]: true,
+  });
+
   return (
     <div
-      className={styles.tile}
+      className={className}
       style={{
         background: color,
-        ...(active ? {} : {}),
       }}
     >
       {char}
