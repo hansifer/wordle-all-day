@@ -2,7 +2,7 @@
   position: absolute;
   padding: 10px 30px;
   border-radius: 7px;
-  box-shadow: 0 0 20px 20px #00000080;
+  box-shadow: 0 0 20px 20px #00000042;
   transition: top 500ms cubic-bezier(.36, .07, .19, .97), opacity 500ms;
   background: linear-gradient(180deg, #673AB7, #251541);
   border: 3px solid #402472;
