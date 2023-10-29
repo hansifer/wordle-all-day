@@ -17,7 +17,7 @@ export const Row = ({ active, word = "", guessWord }) => {
       nonGreenChars.splice(nonGreenChars.indexOf(char), 1);
       return "#b69f3c"; // yellow
     }
-    return "rgb(39 39 42 / 56%)";
+    return "rgb(39 39 42)";
   };
 
   return (
