@@ -13,8 +13,8 @@ export const Board = ({}) => {
   const [words, setWords] = useState([""]);
   const [guessWord, setGuessWord] = useState(selectGuessWord());
 
-  // console.log(words);
-  // console.log(guessWord);
+  console.log(words);
+  console.log(guessWord);
 
   const restartButtonRef = useRef();
 
@@ -39,7 +39,7 @@ export const Board = ({}) => {
 
         if (
           currentWord.length === 5 ||
-          (restWords.includes(guessWord) && currentWord === "")
+          (words.includes(guessWord) && currentWord === "")
         ) {
           return words;
         }
@@ -110,7 +110,9 @@ export const Board = ({}) => {
           visible={
             (words.includes(guessWord) && words[0] === "") || words.length === 7
           }
-          guessWord={words.length === 7 ? guessWord : ""}
+          guessWord={
+            words.length === 7 && !words.includes(guessWord) ? guessWord : ""
+          }
         />
       ) : null}
     </>
