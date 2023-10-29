@@ -8,7 +8,7 @@ Exercise to create a Wordle game with Next.js.
 
 # TODO
 
-- separate out target words from valid words
+- separate out target words from valid (ie, guessable) words
   - eliminate eg plural and obscure target words
-- select and test target word server-side
+- select and test target word server-side instead of client-side
   - allow for cooperative play via link
