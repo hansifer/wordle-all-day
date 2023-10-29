@@ -1,0 +1,9 @@
+.notification {
+  position: absolute;
+  background: linear-gradient(180deg, #673AB7, #251541);
+  padding: 10px 30px;
+  border-radius: 7px;
+  box-shadow: 0 0 20px 20px #00000080;
+  transition: top 500ms cubic-bezier(.36, .07, .19, .97), opacity 500ms;
+  border: 3px solid #402472;
+}

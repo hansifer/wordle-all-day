@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Row } from "./Row";
+import { Notification } from "./Notification";
 import { Keyboard } from "./Keyboard";
 import { isValidWord, selectGuessWord } from "../lib/util";
 import styles from "./board.module.css";
@@ -34,9 +35,15 @@ export const Board = ({}) => {
       });
     } else if (key >= "a" && key <= "z") {
       setWords((words) => {
-        if (words[0].length === 5) return words;
-
         const [currentWord, ...restWords] = words;
+
+        if (
+          currentWord.length === 5 ||
+          (restWords.includes(guessWord) && currentWord === "")
+        ) {
+          return words;
+        }
+
         return [`${currentWord}${key}`, ...restWords];
       });
     }
@@ -98,6 +105,7 @@ export const Board = ({}) => {
         guessWord={guessWord}
         onKeyClick={handleKeyClick}
       />
+      <Notification visible={words.includes(guessWord) && words[0] === ""} />
     </>
   );
 };
