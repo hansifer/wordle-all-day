@@ -1,7 +1,6 @@
 .row {
     display: flex;
     gap: 3px;
-    flex-wrap: wrap;
     margin-bottom: 3px;
 }
 
