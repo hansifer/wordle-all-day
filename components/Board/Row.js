@@ -35,7 +35,7 @@ export const Row = ({ active, word = "", guessWord }) => {
               ? getColor(char, i, guessWord, nonGreenChars)
               : "transparent"
           }
-          active={active && i === word.length}
+          active={active && i === word.length - 1}
         />
       ))}
     </div>

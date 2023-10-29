@@ -11,3 +11,7 @@
     border-radius: 5px;
     transition: color 300ms;
 }
+
+.tileActive {
+    border-color: #626266;
+}
