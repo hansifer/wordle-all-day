@@ -1,32 +1,47 @@
 .tile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: 50px;
-    border: 2px solid #3a3a3c;
-    border-radius: 5px;
-    font-size: 24px;
-    font-weight: 500;
-    text-transform: uppercase;
-    transition: color 300ms, background-color 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  border: 2px solid #3a3a3c;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 300ms, background-color 300ms;
 }
 
 .tileActive {
-    border-color: #626266;
+  border-color: #626266;
+  animation: pop 0.2s cubic-bezier(.36, .07, .19, .97);
 }
 
 .matchDirect {
-    background-color: #538d4e;
-    border-color: #538d4e;
+  background-color: #538d4e;
+  border-color: #538d4e;
 }
 
 .matchIndirect {
-    background-color: #b69f3c;
-    border-color: #b69f3c;
+  background-color: #b69f3c;
+  border-color: #b69f3c;
 }
 
 .matchNone {
-    background-color: #3a3a3c;
-    border-color: #3a3a3c;
+  background-color: #3a3a3c;
+  border-color: #3a3a3c;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(100%);
+  }
+
+  50% {
+    transform: scale(108%);
+  }
+
+  100% {
+    transform: scale(100%);
+  }
 }
