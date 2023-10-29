@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Row } from "./Row";
 import { Notification } from "./Notification";
 import { Keyboard } from "./Keyboard";
@@ -13,41 +13,44 @@ export const Board = ({}) => {
   const [words, setWords] = useState([""]);
   const [guessWord, setGuessWord] = useState(selectGuessWord());
 
-  console.log(words);
-  console.log(guessWord);
+  // console.log(words);
+  // console.log(guessWord);
 
   const restartButtonRef = useRef();
 
-  const processKey = (key) => {
-    if (key === "Enter") {
-      setWords((words) =>
-        words.length < 7 && words[0].length === 5 && isValidWord(words[0])
-          ? ["", ...words]
-          : words
-      );
-    } else if (key === "Backspace") {
-      setWords((words) => {
-        const [currentWord, ...restWords] = words;
-        return [
-          `${currentWord.slice(0, currentWord.length - 1)}`,
-          ...restWords,
-        ];
-      });
-    } else if (key >= "a" && key <= "z") {
-      setWords((words) => {
-        const [currentWord, ...restWords] = words;
+  const processKey = useCallback(
+    (key) => {
+      if (key === "Enter") {
+        setWords((words) =>
+          words.length < 7 && words[0].length === 5 && isValidWord(words[0])
+            ? ["", ...words]
+            : words
+        );
+      } else if (key === "Backspace") {
+        setWords((words) => {
+          const [currentWord, ...restWords] = words;
+          return [
+            `${currentWord.slice(0, currentWord.length - 1)}`,
+            ...restWords,
+          ];
+        });
+      } else if (key >= "a" && key <= "z") {
+        setWords((words) => {
+          const [currentWord, ...restWords] = words;
 
-        if (
-          currentWord.length === 5 ||
-          (words.includes(guessWord) && currentWord === "")
-        ) {
-          return words;
-        }
+          if (
+            currentWord.length === 5 ||
+            (words.includes(guessWord) && currentWord === "")
+          ) {
+            return words;
+          }
 
-        return [`${currentWord}${key}`, ...restWords];
-      });
-    }
-  };
+          return [`${currentWord}${key}`, ...restWords];
+        });
+      }
+    },
+    [guessWord]
+  );
 
   useEffect(() => {
     const handleKeydown = (e) => {
@@ -65,7 +68,7 @@ export const Board = ({}) => {
     return () => {
       document.removeEventListener("keydown", handleKeydown);
     };
-  }, []);
+  }, [processKey]);
 
   const handleRestart = () => {
     setWords([""]);
