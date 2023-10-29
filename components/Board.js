@@ -13,8 +13,8 @@ export const Board = ({}) => {
   const [words, setWords] = useState([""]);
   const [guessWord, setGuessWord] = useState(selectGuessWord());
 
-  console.log(words);
-  console.log(guessWord);
+  // console.log(words);
+  // console.log(guessWord);
 
   const restartButtonRef = useRef();
 
