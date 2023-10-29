@@ -12,3 +12,4 @@ Exercise to create a Wordle game with Next.js.
   - eliminate eg plural and obscure target words
 - select and test target word server-side instead of client-side
   - allow for cooperative play via link
+- avoid recent target word repeats
