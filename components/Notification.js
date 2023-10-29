@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import styles from "./notification.module.css";
 import { selectVictoryMessage } from "../lib/util";
 
-export const Notification = ({ visible, guessWord }) => {
+export const Notification = ({ visible, guessWord, onClick }) => {
   const [message, setMessage] = useState("");
 
-  // set state in useEffect to avoid error "Text content does not match server-rendered HTML"
+  // set state in useEffect to avoid next.js error "Text content does not match server-rendered HTML"
   useEffect(() => {
     setMessage(selectVictoryMessage());
   }, [visible]);
@@ -26,6 +26,7 @@ export const Notification = ({ visible, guessWord }) => {
               opacity: 0,
             }
       }
+      onClick={onClick}
     >
       {guessWord ? `The word was: "${guessWord}"` : message}
     </div>

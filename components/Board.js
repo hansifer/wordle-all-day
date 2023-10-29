@@ -22,7 +22,9 @@ export const Board = () => {
     (key) => {
       if (key === "Enter") {
         setWords((words) =>
-          words.length < 7 && words[0].length === 5 && isValidWord(words[0])
+          words.length < ROW_COUNT + 1 &&
+          words[0].length === 5 &&
+          isValidWord(words[0])
             ? ["", ...words]
             : words
         );
@@ -53,14 +55,14 @@ export const Board = () => {
   );
 
   useEffect(() => {
-    const handleKeydown = (e) => {
-      if (e.shiftKey || e.ctrlKey || e.altKey || e.metaKey) return;
+    const handleKeydown = ({ key, shiftKey, ctrlKey, altKey, metaKey }) => {
+      // ignore use of keyboard shortcuts
+      if (shiftKey || ctrlKey || altKey || metaKey) return;
 
-      // console.log(e);
-
+      // once user types a key, ensure Enter key commits word instead of resetting game
       restartButtonRef.current.blur();
 
-      processKey(e.key);
+      processKey(key);
     };
 
     document.addEventListener("keydown", handleKeydown);
@@ -112,6 +114,7 @@ export const Board = () => {
           guessWord={
             words.length === 7 && !words.includes(guessWord) ? guessWord : ""
           }
+          onClick={handleRestart}
         />
       ) : null}
     </>
