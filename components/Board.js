@@ -9,7 +9,7 @@ import refreshIcon from "../public/refresh.svg";
 
 const ROW_COUNT = 6;
 
-export const Board = ({}) => {
+export const Board = () => {
   const [words, setWords] = useState([""]);
   const [guessWord, setGuessWord] = useState(selectGuessWord());
 
@@ -75,10 +75,6 @@ export const Board = ({}) => {
     setGuessWord(selectGuessWord());
   };
 
-  const handleKeyClick = (key) => {
-    processKey(key);
-  };
-
   const wordsReversed = words.slice().reverse();
 
   return (
@@ -106,7 +102,7 @@ export const Board = ({}) => {
       <Keyboard
         usedWords={words.slice(1)}
         guessWord={guessWord}
-        onKeyClick={handleKeyClick}
+        onKeyClick={processKey}
       />
       {words.length > 1 ? (
         <Notification
