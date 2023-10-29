@@ -1,6 +1,6 @@
 import styles from "./row.module.css";
 import { Cell } from "./Cell";
-import { isValidWord } from "../lib/util";
+import { isValidWord } from "../../lib/util";
 
 export const Row = ({ active, word = "", guessWord }) => {
   const paddedWord = word.padEnd(5, " ");

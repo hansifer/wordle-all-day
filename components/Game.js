@@ -1,15 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Row } from "./Row";
-import { Notification } from "./Notification";
-import { Keyboard } from "./Keyboard";
+import { Board } from "./Board/Board";
+import { Notification } from "./Notification/Notification";
+import { Keyboard } from "./Keyboard/Keyboard";
 import { isValidWord, selectGuessWord } from "../lib/util";
-import styles from "./board.module.css";
+import styles from "./game.module.css";
 import Image from "next/image";
 import refreshIcon from "../public/refresh.svg";
+import { ROW_COUNT } from "../lib/config";
 
-const ROW_COUNT = 6;
-
-export const Board = () => {
+export const Game = () => {
   const [words, setWords] = useState([""]);
   const [guessWord, setGuessWord] = useState(selectGuessWord());
 
@@ -77,8 +76,6 @@ export const Board = () => {
     setGuessWord(selectGuessWord());
   };
 
-  const wordsReversed = words.slice().reverse();
-
   return (
     <>
       <div className={styles.boardHeader}>
@@ -91,16 +88,7 @@ export const Board = () => {
           <Image alt="Refresh" src={refreshIcon} width="20" height="20" />
         </button>
       </div>
-      <div className={styles.board}>
-        {[...Array(ROW_COUNT)].map((e, i) => (
-          <Row
-            key={i}
-            active={i === words.length - 1}
-            word={wordsReversed[i]}
-            guessWord={guessWord}
-          />
-        ))}
-      </div>
+      <Board words={words} guessWord={guessWord} />
       <Keyboard
         usedWords={words.slice(1)}
         guessWord={guessWord}

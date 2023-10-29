@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
-import { Board } from "../components/Board";
+import { Game } from "../components/Game";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <Board />
+        <Game />
       </section>
     </Layout>
   );

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./notification.module.css";
-import { selectVictoryMessage } from "../lib/util";
+import { selectVictoryMessage } from "../../lib/util";
 
 export const Notification = ({ visible, guessWord, onClick }) => {
   const [message, setMessage] = useState("");
