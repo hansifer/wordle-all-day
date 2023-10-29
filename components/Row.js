@@ -5,6 +5,12 @@ import { isValidWord } from "../lib/util";
 export const Row = ({ active, word = "", guessWord }) => {
   const paddedWord = word.padEnd(5, " ");
 
+  const nonGreenChars = [];
+
+  for (let i = 0; i < guessWord.length; i++) {
+    if (guessWord[i] !== word[i]) nonGreenChars.push(guessWord[i]);
+  }
+
   return (
     <div
       className={`${styles.row} ${
@@ -17,7 +23,7 @@ export const Row = ({ active, word = "", guessWord }) => {
           char={char}
           color={
             !active && word.length === 5
-              ? getColor(char, i, guessWord)
+              ? getColor(char, i, guessWord, nonGreenChars)
               : "transparent"
           }
           active={active && i === word.length}
@@ -27,8 +33,8 @@ export const Row = ({ active, word = "", guessWord }) => {
   );
 };
 
-function getColor(char, position, guessWord) {
+function getColor(char, position, guessWord, nonGreenChars) {
   if (guessWord[position] === char) return "#538d4e"; // green
-  if (guessWord.includes(char)) return "#b69f3c"; // yellow
+  if (nonGreenChars.includes(char)) return "#b69f3c"; // yellow
   return "rgb(39 39 42 / 56%)";
 }
