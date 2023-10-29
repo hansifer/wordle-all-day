@@ -7,7 +7,7 @@ const rows = [
   ["Enter", "z", "x", "c", "v", "b", "n", "m", "Backspace"],
 ];
 
-export const Keyboard = ({ usedWords, guessWord, onKeyClick }) => {
+export const Keyboard = ({ usedWords, targetWord, onKeyClick }) => {
   return (
     <div className={styles.keyboard}>
       {rows.map((row, i) => (
@@ -16,7 +16,7 @@ export const Keyboard = ({ usedWords, guessWord, onKeyClick }) => {
             <Key
               key={key}
               char={key}
-              status={getKeyStatus(key, usedWords, guessWord)}
+              status={getKeyStatus(key, usedWords, targetWord)}
               onClick={() => onKeyClick(key)}
             />
           ))}
@@ -26,16 +26,16 @@ export const Keyboard = ({ usedWords, guessWord, onKeyClick }) => {
   );
 };
 
-function getKeyStatus(key, usedWords, guessWord) {
+function getKeyStatus(key, usedWords, targetWord) {
   for (const word of usedWords) {
     for (let i = 0; i < word.length; i++) {
-      if (word[i] === guessWord[i] && word[i] === key) return "green";
+      if (word[i] === targetWord[i] && word[i] === key) return "green";
     }
   }
 
   for (const word of usedWords) {
     if (word.includes(key)) {
-      if (guessWord.includes(key)) {
+      if (targetWord.includes(key)) {
         return "yellow";
       } else {
         return "used";

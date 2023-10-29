@@ -3,17 +3,17 @@ import { Tile } from "./Tile";
 import { isValidWord } from "../../lib/util";
 import { classy } from "../../lib/util/css";
 
-export const Row = ({ active, word = "", guessWord }) => {
+export const Row = ({ active, word = "", targetWord }) => {
   const paddedWord = word.padEnd(5, " ");
 
   const nonGreenChars = [];
 
-  for (let i = 0; i < guessWord.length; i++) {
-    if (guessWord[i] !== word[i]) nonGreenChars.push(guessWord[i]);
+  for (let i = 0; i < targetWord.length; i++) {
+    if (targetWord[i] !== word[i]) nonGreenChars.push(targetWord[i]);
   }
 
-  const getMatchState = (char, position, guessWord, nonGreenChars) => {
-    if (guessWord[position] === char) return "direct";
+  const getMatchState = (char, position, targetWord, nonGreenChars) => {
+    if (targetWord[position] === char) return "direct";
 
     if (nonGreenChars.includes(char)) {
       nonGreenChars.splice(nonGreenChars.indexOf(char), 1);
@@ -38,7 +38,7 @@ export const Row = ({ active, word = "", guessWord }) => {
           char={char}
           matchState={
             wordCommitted
-              ? getMatchState(char, i, guessWord, nonGreenChars)
+              ? getMatchState(char, i, targetWord, nonGreenChars)
               : null
           }
           active={active && i === word.length - 1}

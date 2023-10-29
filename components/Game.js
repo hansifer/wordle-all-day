@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Board } from "./Board/Board";
 import { Notification } from "./Notification/Notification";
 import { Keyboard } from "./Keyboard/Keyboard";
-import { isValidWord, selectGuessWord } from "../lib/util";
+import { isValidWord, selectTargetWord } from "../lib/util";
 import styles from "./game.module.css";
 import Image from "next/image";
 import refreshIcon from "../public/refresh.svg";
@@ -10,10 +10,10 @@ import { ROW_COUNT } from "../lib/config";
 
 export const Game = () => {
   const [words, setWords] = useState([""]);
-  const [guessWord, setGuessWord] = useState(selectGuessWord());
+  const [targetWord, setTargetWord] = useState(selectTargetWord());
 
   // console.log(words);
-  // console.log(guessWord);
+  // console.log(targetWord);
 
   const restartButtonRef = useRef();
 
@@ -41,7 +41,7 @@ export const Game = () => {
 
           if (
             currentWord.length === 5 ||
-            (words.includes(guessWord) && currentWord === "")
+            (words.includes(targetWord) && currentWord === "")
           ) {
             return words;
           }
@@ -50,7 +50,7 @@ export const Game = () => {
         });
       }
     },
-    [guessWord]
+    [targetWord]
   );
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export const Game = () => {
 
   const handleRestart = () => {
     setWords([""]);
-    setGuessWord(selectGuessWord());
+    setTargetWord(selectTargetWord());
   };
 
   return (
@@ -88,19 +88,20 @@ export const Game = () => {
           <Image alt="Refresh" src={refreshIcon} width="20" height="20" />
         </button>
       </div>
-      <Board words={words} guessWord={guessWord} />
+      <Board words={words} targetWord={targetWord} />
       <Keyboard
         usedWords={words.slice(1)}
-        guessWord={guessWord}
+        targetWord={targetWord}
         onKeyClick={processKey}
       />
       {words.length > 1 ? (
         <Notification
           visible={
-            (words.includes(guessWord) && words[0] === "") || words.length === 7
+            (words.includes(targetWord) && words[0] === "") ||
+            words.length === 7
           }
-          guessWord={
-            words.length === 7 && !words.includes(guessWord) ? guessWord : ""
+          targetWord={
+            words.length === 7 && !words.includes(targetWord) ? targetWord : ""
           }
           onClick={handleRestart}
         />
