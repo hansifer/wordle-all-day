@@ -11,6 +11,15 @@ export const Row = ({ active, word = "", guessWord }) => {
     if (guessWord[i] !== word[i]) nonGreenChars.push(guessWord[i]);
   }
 
+  const getColor = (char, position, guessWord, nonGreenChars) => {
+    if (guessWord[position] === char) return "#538d4e"; // green
+    if (nonGreenChars.includes(char)) {
+      nonGreenChars.splice(nonGreenChars.indexOf(char), 1);
+      return "#b69f3c"; // yellow
+    }
+    return "rgb(39 39 42 / 56%)";
+  };
+
   return (
     <div
       className={`${styles.row} ${
@@ -32,9 +41,3 @@ export const Row = ({ active, word = "", guessWord }) => {
     </div>
   );
 };
-
-function getColor(char, position, guessWord, nonGreenChars) {
-  if (guessWord[position] === char) return "#538d4e"; // green
-  if (nonGreenChars.includes(char)) return "#b69f3c"; // yellow
-  return "rgb(39 39 42 / 56%)";
-}
