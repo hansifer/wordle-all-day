@@ -15,3 +15,18 @@
 .tileActive {
     border-color: #626266;
 }
+
+.matchDirect {
+    background-color: #538d4e;
+    border-color: #538d4e;
+}
+
+.matchIndirect {
+    background-color: #b69f3c;
+    border-color: #b69f3c;
+}
+
+.matchNone {
+    background-color: #3a3a3c;
+    border-color: #3a3a3c;
+}

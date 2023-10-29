@@ -11,14 +11,18 @@ export const Row = ({ active, word = "", guessWord }) => {
     if (guessWord[i] !== word[i]) nonGreenChars.push(guessWord[i]);
   }
 
-  const getColor = (char, position, guessWord, nonGreenChars) => {
-    if (guessWord[position] === char) return "#538d4e"; // green
+  const getMatchState = (char, position, guessWord, nonGreenChars) => {
+    if (guessWord[position] === char) return "direct";
+
     if (nonGreenChars.includes(char)) {
       nonGreenChars.splice(nonGreenChars.indexOf(char), 1);
-      return "#b69f3c"; // yellow
+      return "indirect";
     }
-    return "#3a3a3c";
+
+    return "none";
   };
+
+  const wordCommitted = !active && word.length === 5;
 
   return (
     <div
@@ -30,10 +34,10 @@ export const Row = ({ active, word = "", guessWord }) => {
         <Tile
           key={i}
           char={char}
-          color={
-            !active && word.length === 5
-              ? getColor(char, i, guessWord, nonGreenChars)
-              : "transparent"
+          matchState={
+            wordCommitted
+              ? getMatchState(char, i, guessWord, nonGreenChars)
+              : null
           }
           active={active && i === word.length - 1}
         />
