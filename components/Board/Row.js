@@ -1,6 +1,7 @@
 import styles from "./row.module.css";
 import { Tile } from "./Tile";
 import { isValidWord } from "../../lib/util";
+import { classy } from "../../lib/util/css";
 
 export const Row = ({ active, word = "", guessWord }) => {
   const paddedWord = word.padEnd(5, " ");
@@ -24,12 +25,13 @@ export const Row = ({ active, word = "", guessWord }) => {
 
   const wordCommitted = !active && word.length === 5;
 
+  const className = classy({
+    [styles.row]: true,
+    [styles.rowError]: active && word.length === 5 && !isValidWord(word),
+  });
+
   return (
-    <div
-      className={`${styles.row} ${
-        active && word.length === 5 && !isValidWord(word) ? styles.rowError : ""
-      }`}
-    >
+    <div className={className}>
       {paddedWord.split("").map((char, i) => (
         <Tile
           key={i}
