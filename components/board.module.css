@@ -1,0 +1,30 @@
+.board {
+    user-select: none;
+}
+
+.boardHeader {
+    font-family: "";
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    margin: 18px 0;
+    font-size: 32px;
+}
+
+.refreshButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    padding: 6px;
+    margin-left: 18px;
+}
+
+.refreshButton:hover {
+    background-color: #333;
+    transition: 300ms background-color;
+    border-radius: 9999px;
+
+}

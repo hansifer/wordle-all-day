@@ -1,0 +1,13 @@
+.cell {
+    border: 2px solid #3a3a3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 24px;
+    text-transform: capitalize;
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+    transition: color 300ms;
+}
