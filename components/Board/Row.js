@@ -1,5 +1,5 @@
 import styles from "./row.module.css";
-import { Cell } from "./Cell";
+import { Tile } from "./Tile";
 import { isValidWord } from "../../lib/util";
 
 export const Row = ({ active, word = "", guessWord }) => {
@@ -27,7 +27,7 @@ export const Row = ({ active, word = "", guessWord }) => {
       }`}
     >
       {paddedWord.split("").map((char, i) => (
-        <Cell
+        <Tile
           key={i}
           char={char}
           color={

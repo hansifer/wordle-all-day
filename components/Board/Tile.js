@@ -1,9 +1,9 @@
-import styles from "./cell.module.css";
+import styles from "./tile.module.css";
 
-export const Cell = ({ char, color, active }) => {
+export const Tile = ({ char, color, active }) => {
   return (
     <div
-      className={styles.cell}
+      className={styles.tile}
       style={{
         background: color,
         ...(active ? {} : {}),
