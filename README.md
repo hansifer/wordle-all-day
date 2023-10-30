@@ -13,3 +13,6 @@ Exercise to create a Wordle game with Next.js.
 - select and test target word server-side instead of client-side
   - allow for cooperative play via link
 - avoid recent target word repeats
+- competitive Wordle
+  - side-by-side real-time solving of (same or different) puzzle
+  - timed games
