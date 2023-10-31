@@ -9,7 +9,7 @@ export const Key = ({ status, char, onClick }) => {
       style={char === "Enter" ? { minWidth: 44, fontSize: 10 } : {}}
     >
       {char === "Backspace" ? (
-        <Image src="/delete.svg" height="16" width="16" />
+        <Image src="/delete.svg" height="16" width="16" alt="backspace" />
       ) : (
         char
       )}
