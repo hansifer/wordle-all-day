@@ -1,9 +1,22 @@
+import { useRef, forwardRef, useImperativeHandle } from "react";
 import styles from "./row.module.css";
 import { Tile } from "./Tile";
 import { isValidWord } from "../../lib/util";
 import { classy } from "../../lib/util/css";
 
-export const Row = ({ active, word = "", targetWord }) => {
+export const Row = forwardRef(({ active, word = "", targetWord }, ref) => {
+  const rowRef = useRef();
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      shake: () => {
+        shake(rowRef.current);
+      },
+    }),
+    []
+  );
+
   const paddedWord = word.padEnd(5, " ");
 
   const nonGreenChars = [];
@@ -24,14 +37,16 @@ export const Row = ({ active, word = "", targetWord }) => {
   };
 
   const wordCommitted = !active && word.length === 5;
+  const invalidWord = active && word.length === 5 && !isValidWord(word);
 
   const className = classy({
     [styles.row]: true,
-    [styles.rowError]: active && word.length === 5 && !isValidWord(word),
+    [styles.rowError]: invalidWord,
+    [styles.shake]: invalidWord,
   });
 
   return (
-    <div className={className}>
+    <div className={className} ref={rowRef}>
       {paddedWord.split("").map((char, i) => (
         <Tile
           key={i}
@@ -46,4 +61,13 @@ export const Row = ({ active, word = "", targetWord }) => {
       ))}
     </div>
   );
-};
+});
+
+function shake(el) {
+  el.classList.remove(styles.shake);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      el.classList.add(styles.shake);
+    });
+  });
+}

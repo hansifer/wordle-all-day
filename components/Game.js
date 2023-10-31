@@ -16,15 +16,20 @@ export const Game = () => {
   // console.log(targetWord);
 
   const restartButtonRef = useRef();
+  const boardApi = useRef();
 
   const processKey = useCallback(
     (key) => {
       if (key === "Enter") {
-        setWords((words) =>
-          words.length < ROW_COUNT + 1 && isValidWord(words[0])
-            ? ["", ...words]
-            : words
-        );
+        setWords((words) => {
+          if (words.length < ROW_COUNT + 1 && isValidWord(words[0])) {
+            return ["", ...words];
+          }
+
+          boardApi.current.shakeActiveRow();
+
+          return words;
+        });
       } else if (key === "Backspace") {
         setWords((words) => {
           const [currentWord, ...restWords] = words;
@@ -86,7 +91,7 @@ export const Game = () => {
           <Image alt="Refresh" src={refreshIcon} width="20" height="20" />
         </button>
       </div>
-      <Board words={words} targetWord={targetWord} />
+      <Board words={words} targetWord={targetWord} ref={boardApi} />
       <Keyboard
         usedWords={words.slice(1)}
         targetWord={targetWord}
