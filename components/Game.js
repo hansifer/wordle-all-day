@@ -21,9 +21,7 @@ export const Game = () => {
     (key) => {
       if (key === "Enter") {
         setWords((words) =>
-          words.length < ROW_COUNT + 1 &&
-          words[0].length === 5 &&
-          isValidWord(words[0])
+          words.length < ROW_COUNT + 1 && isValidWord(words[0])
             ? ["", ...words]
             : words
         );
