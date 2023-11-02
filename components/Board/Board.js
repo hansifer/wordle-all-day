@@ -1,5 +1,5 @@
 import { useRef, forwardRef, useImperativeHandle } from "react";
-
+import styles from "./board.module.css";
 import { Row } from "./Row";
 import { ROW_COUNT } from "../../lib/config";
 
@@ -10,7 +10,7 @@ export const Board = forwardRef(({ words, targetWord }, ref) => {
     ref,
     () => ({
       shakeActiveRow: () => {
-        activeRowApi.current.shake();
+        activeRowApi.current?.shake();
       },
     }),
     []
@@ -20,7 +20,7 @@ export const Board = forwardRef(({ words, targetWord }, ref) => {
   const displayWords = words.slice().reverse();
 
   return (
-    <div>
+    <div className={styles.board}>
       {[...Array(ROW_COUNT)].map((_, i) => {
         const active = i === words.length - 1;
 
