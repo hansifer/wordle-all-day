@@ -1,9 +1,8 @@
 .tile {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  width: 50px;
   border: 2px solid #3a3a3c;
   border-radius: 5px;
   font-size: 24px;
