@@ -5,6 +5,8 @@
     align-items: center;
     width: 100%;
     max-width: 360px;
+    padding-bottom: 10px;
+    margin-top: auto;
 }
 
 .keyRow {
