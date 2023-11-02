@@ -1,0 +1,9 @@
+.board {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 5/6;
+  min-height: 262px;
+  max-height: 320px;
+  gap: 3px;
+}
