@@ -26,6 +26,14 @@
   align-items: center;
   font-size: 1.2rem;
   line-height: 1.5;
+  height: 100dvh;
+}
+
+/* limit game height for non-mobile use cases so keyboard snaps next to grid */
+@media (min-height: 700px) {
+  .headingMd {
+    height: 600px;
+  }
 }
 
 .borderCircle {
