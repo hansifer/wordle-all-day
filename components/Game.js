@@ -20,9 +20,29 @@ export const Game = () => {
 
   const processKey = useCallback(
     (key) => {
-      if (key === "Enter") {
+      if (key === "Escape") {
         setWords((words) => {
-          if (words.length < ROW_COUNT + 1 && isValidWord(words[0])) {
+          if (gameOver(words, targetWord)) {
+            // reset game
+            setTargetWord(selectTargetWord()); // todo: ok to call inside setter callback?
+            return [""];
+          }
+
+          const [currentWord, ...restWords] = words;
+
+          if (!currentWord.length) return words;
+
+          return ["", ...restWords];
+        });
+      } else if (key === "Enter") {
+        setWords((words) => {
+          if (gameOver(words, targetWord)) {
+            // reset game
+            setTargetWord(selectTargetWord()); // todo: ok to call inside setter callback?
+            return [""];
+          }
+
+          if (isValidWord(words[0])) {
             return ["", ...words];
           }
 
@@ -33,6 +53,9 @@ export const Game = () => {
       } else if (key === "Backspace") {
         setWords((words) => {
           const [currentWord, ...restWords] = words;
+
+          if (!currentWord.length) return words;
+
           return [
             `${currentWord.slice(0, currentWord.length - 1)}`,
             ...restWords,
@@ -42,10 +65,7 @@ export const Game = () => {
         setWords((words) => {
           const [currentWord, ...restWords] = words;
 
-          if (
-            currentWord.length === 5 ||
-            (words.includes(targetWord) && currentWord === "")
-          ) {
+          if (currentWord.length === 5 || gameOver(words, targetWord)) {
             return words;
           }
 
@@ -112,3 +132,9 @@ export const Game = () => {
     </>
   );
 };
+
+function gameOver(words, targetWord) {
+  return (
+    words.length > ROW_COUNT || (words.includes(targetWord) && words[0] === "")
+  );
+}
