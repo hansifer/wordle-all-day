@@ -6,6 +6,7 @@
   transition: top 500ms cubic-bezier(.36, .07, .19, .97), opacity 500ms;
   background: linear-gradient(180deg, #673AB7, #251541);
   border: 3px solid #402472;
+  user-select: none;
 }
 
 .notificationFailed {
