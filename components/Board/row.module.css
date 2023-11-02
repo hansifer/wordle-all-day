@@ -1,7 +1,7 @@
 .row {
+  flex: 1;
   display: flex;
   gap: 3px;
-  margin-bottom: 3px;
 }
 
 .rowError {
